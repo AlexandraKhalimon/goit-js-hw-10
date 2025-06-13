@@ -43,7 +43,7 @@ fieldset {
 
 fieldset:hover,
 fieldset:focus {
-    stroke: #000;
+    border-color: #000;
 }
 
 legend {

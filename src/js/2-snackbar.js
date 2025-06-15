@@ -10,7 +10,7 @@ promiseForm.addEventListener("submit", handleForm);
 
 function handleForm(event) {
     event.preventDefault();
-    const delay = delayInput.value;
+    const delay = parseInt(delayInput.value);
     const fulfilled = fulfilledBtn.checked;
     const rejected = rejectedBtn.checked;
     promiseForm.reset();
@@ -18,19 +18,16 @@ function handleForm(event) {
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
             if (fulfilled) {
-                resolve(`✅ Fulfilled promise in ${delay}ms`);
-            };
-            if (rejected) {
-                reject(`❌ Rejected promise in ${delay}ms`)
+                resolve(delay);
+            } else {
+                reject(delay);
             }
         }, delay);
-    });
-
-    promise
+    })
         .then(
             value => {
                 iziToast.show({
-                    message: value,
+                    message: `✅ Fulfilled promise in ${value}ms`,
                     messageSize: `18`,
                     color: `green`,
                     position: `topCenter`,
@@ -39,7 +36,7 @@ function handleForm(event) {
         .catch(
             error => {
                 iziToast.show({
-                    message: error,
+                    message: `❌ Rejected promise in ${error}ms`,
                     messageSize: `18`,
                     color: `red`,
                     position: `topCenter`,
